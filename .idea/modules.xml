@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://F:\MEGA\AndroidDevAdvanced\MoviesByGA-version.2.0-working-videoclips-\MoviesByGA.iml" filepath="F:\MEGA\AndroidDevAdvanced\MoviesByGA-version.2.0-working-videoclips-\MoviesByGA.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MoviesByGA-version.2.0-working-videoclips-.iml" filepath="$PROJECT_DIR$/MoviesByGA-version.2.0-working-videoclips-.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://F:\MEGA\AndroidDevAdvanced\MoviesByGA-version.2.0-working-videoclips-\app\app.iml" filepath="F:\MEGA\AndroidDevAdvanced\MoviesByGA-version.2.0-working-videoclips-\app\app.iml" />
+    </modules>
+  </component>
+</project>
