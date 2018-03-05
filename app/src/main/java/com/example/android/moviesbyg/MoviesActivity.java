@@ -68,7 +68,7 @@ public class MoviesActivity extends AppCompatActivity implements LoaderManager.L
         Log.i(LOG_TAG, "initLoader");
 
         // Find a reference to the {@link ListView} in the layout
-        moviesRecyclerView = (RecyclerView) findViewById(R.id.list_item);
+        moviesRecyclerView = findViewById(R.id.list_item);
 
         if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
             moviesRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
@@ -86,7 +86,7 @@ public class MoviesActivity extends AppCompatActivity implements LoaderManager.L
         moviesRecyclerView.addItemDecoration(new android.support.v7.widget.DividerItemDecoration(this, DividerItemDecoration.HORIZONTAL_LIST));
         moviesRecyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        mEmptyStateTextView = (TextView) findViewById(R.id.empty_view);
+        mEmptyStateTextView = findViewById(R.id.empty_view);
 
         // Get a reference to the ConnectivityManager to check state of network connectivity
         ConnectivityManager cm = (ConnectivityManager)
@@ -196,6 +196,13 @@ public class MoviesActivity extends AppCompatActivity implements LoaderManager.L
 
         state = moviesRecyclerView.getLayoutManager().onSaveInstanceState();
 
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        // save RecyclerView state
+        state = moviesRecyclerView.getLayoutManager().onSaveInstanceState();
     }
 
     @Override
