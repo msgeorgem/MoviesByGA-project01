@@ -29,7 +29,7 @@ class QueryUtils {
     /**
      * Tag for the log messages
      */
-    private static final String api_key = "1157007d8e3f7d5e0af6d7e4165e2730";
+    private static final String api_key = BuildConfig.API_KEY;
     private static final String MDB_MOVIE_PATH2 = "/videos?api_key=" + api_key;
     private static final String MDB_REVIEWS_PATH2 = "/reviews?api_key=" + api_key;
     private static final String API_KEY = "api_key";
