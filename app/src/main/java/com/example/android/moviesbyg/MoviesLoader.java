@@ -7,16 +7,16 @@ import android.util.Log;
 import java.util.ArrayList;
 
 /**
- * Created by Marcin on 2017-09-12.
+ * Created by Marcin on 2018-02-10.
  */
 
-public class MoviesLoader extends AsyncTaskLoader<ArrayList<SingleMovie>> {
+class MoviesLoader extends AsyncTaskLoader<ArrayList<SingleMovie>> {
 
     /** Tag for log messages */
     private static final String LOG_TAG = MoviesLoader.class.getName();
-    private ArrayList<SingleMovie> mData;
     /** Query URL */
-    private String mUrl;
+    private final String mUrl;
+    private ArrayList<SingleMovie> mData;
 
     /**
      * Constructs a new {@link MoviesLoader}.
@@ -69,6 +69,5 @@ public class MoviesLoader extends AsyncTaskLoader<ArrayList<SingleMovie>> {
         if (isStarted()) {
             super.deliverResult(data);
         }
-
     }
 }

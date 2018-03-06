@@ -3,14 +3,8 @@ package com.example.android.moviesbyg;
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
-import android.graphics.Bitmap;
 import android.graphics.PorterDuff;
-import android.os.Build;
 import android.os.Bundle;
-import android.renderscript.Allocation;
-import android.renderscript.Element;
-import android.renderscript.RenderScript;
-import android.renderscript.ScriptIntrinsicBlur;
 import android.support.v4.app.NavUtils;
 import android.support.v4.app.ShareCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -25,13 +19,13 @@ import com.example.android.moviesbyg.databinding.ActivityDetailBinding;
 import com.squareup.picasso.Picasso;
 
 /**
- * Created by Marcin on 2017-09-10.
+ * Created by Marcin on 2018-02-10.
  */
 
 public class DetailActivity extends AppCompatActivity {
 
-    public static final String LOG_TAG = DetailActivity.class.getSimpleName();
-    public static String MDB_CURRENT_MOVIE_ID;
+    private static final String LOG_TAG = DetailActivity.class.getSimpleName();
+    private static String MDB_CURRENT_MOVIE_ID;
     private final String MDB_SHARE_HASHTAG = "IMDB Source";
     private String mMovieSummary;
     private Context context;
@@ -68,6 +62,7 @@ public class DetailActivity extends AppCompatActivity {
         ImageView imageView = findViewById(R.id.poster1);
         imageView.setColorFilter(0x7f000000, PorterDuff.Mode.DARKEN);
 
+
         Glide.with(context.getApplicationContext())
                 .load(poster)   //passing your url to load image.
                 .override(400, 400)  //just set override like this
@@ -75,9 +70,6 @@ public class DetailActivity extends AppCompatActivity {
                 .into(imageView);
 
     }
-//for the details?! It's super simple. match_parent to both over an image view. So,
-// you'll need to have a frame or relative layout to put it over the back.
-// Then, scaleType = centerCrop. To make it "darker" add any view on top with an alpha channel dark: #80000000 for example
 
     @Override
     protected void onPause() {
@@ -89,7 +81,6 @@ public class DetailActivity extends AppCompatActivity {
         super.onResume();
 
     }
-
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
@@ -112,7 +103,6 @@ public class DetailActivity extends AppCompatActivity {
         /* Return true so that the menu is displayed in the Toolbar */
         return true;
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -146,36 +136,4 @@ public class DetailActivity extends AppCompatActivity {
         super.onStop();
     }
 
-    public class BlurBuilder {
-        private static final float BITMAP_SCALE = 0.4f;
-        private static final float BLUR_RADIUS = 7.5f;
-
-        public Bitmap blur(Context context, Bitmap image) {
-            int width = Math.round(image.getWidth() * BITMAP_SCALE);
-            int height = Math.round(image.getHeight() * BITMAP_SCALE);
-
-            Bitmap inputBitmap = Bitmap.createScaledBitmap(image, width, height, false);
-            Bitmap outputBitmap = Bitmap.createBitmap(inputBitmap);
-
-            RenderScript rs = RenderScript.create(context);
-            ScriptIntrinsicBlur theIntrinsic = null;
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-                theIntrinsic = ScriptIntrinsicBlur.create(rs, Element.U8_4(rs));
-            }
-            Allocation tmpIn = Allocation.createFromBitmap(rs, inputBitmap);
-            Allocation tmpOut = Allocation.createFromBitmap(rs, outputBitmap);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-                theIntrinsic.setRadius(BLUR_RADIUS);
-            }
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-                theIntrinsic.setInput(tmpIn);
-            }
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-                theIntrinsic.forEach(tmpOut);
-            }
-            tmpOut.copyTo(outputBitmap);
-
-            return outputBitmap;
-        }
-    }
 }

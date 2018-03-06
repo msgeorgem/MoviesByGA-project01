@@ -13,7 +13,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 /**
- * Created by Marcin on 2017-09-12.
+ * Created by Marcin on 2018-02-10.
  */
 
 public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder> {
@@ -27,11 +27,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MoviesView
     public static final String EXTRA_ID = "EXTRA_ID";
     public static final String EXTRA_POSTER = "EXTRA_POSTER";
 
-    private static final int IMG_LOADER = 22;
-    private static final String IMG_URL_EXTRA = "img";
-    private MoviesActivity activity = new MoviesActivity();
-    private ArrayList<SingleMovie> mListAdapter;
-
+    private final ArrayList<SingleMovie> mListAdapter;
 
     public MoviesAdapter(ArrayList<SingleMovie> listMovies) {
         mListAdapter = listMovies;
@@ -59,13 +55,6 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MoviesView
         Context context = viewHolder.itemView.getContext();
         Picasso.with(context).load(viewHolder.imageURL).fit().into(viewHolder.imageView);
 
-//        viewHolder.titleTextView.setText(currentMovie.getTitle());
-//        viewHolder.shortTextView.setText(currentMovie.getShorttext());
-//
-//
-//        String formattedDate = (currentMovie.getDateTime()).substring(0, 10);
-//        viewHolder.dateView.setText(formattedDate);
-//        viewHolder.typeTextView.setText(currentMovie.getSectionName());
         viewHolder.imageView.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -91,28 +80,15 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MoviesView
         });
     }
 
-
     public class MoviesViewHolder extends RecyclerView.ViewHolder {
-        public String imageURL;
-        public ImageView imageView;
-//        private TextView titleTextView;
-//        private TextView shortTextView;
-//        private TextView dateView;
-//        private TextView typeTextView;
+        private final ImageView imageView;
+        private String imageURL;
 
 
-        public MoviesViewHolder(View view) {
+        private MoviesViewHolder(View view) {
             super(view);
             this.imageView = view
                     .findViewById(R.id.thumbnail);
-//            this.titleTextView = (TextView) view
-//                    .findViewById(R.id.poster);
-//            this.shortTextView = (TextView) view
-//                    .findViewById(R.id.shorttext);
-//            this.dateView = (TextView) view
-//                    .findViewById(date);
-//            this.typeTextView = (TextView) view
-//                    .findViewById(R.id.SectionName);
 
         }
     }

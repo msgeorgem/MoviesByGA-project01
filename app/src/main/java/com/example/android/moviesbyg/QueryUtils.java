@@ -18,20 +18,20 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 
 /**
- * Created by Marcin on 2017-09-12.
+ * Created by Marcin on 2018-02-10.
  */
 
-public class QueryUtils {
-    public static final String LOG_TAG = QueryUtils.class.getSimpleName();
-    public static final String MDB_POSTER_PATH = "http://image.tmdb.org/t/p/w185";
-    public static final String MDB_MOVIE_PATH1 = "https://api.themoviedb.org/3/movie/";
+class QueryUtils {
     public static final String TEST_MDB_MOVIE_PATH = "https://api.themoviedb.org/3/movie/321612/videos?api_key=1157007d8e3f7d5e0af6d7e4165e2730";
+    private static final String LOG_TAG = QueryUtils.class.getSimpleName();
+    private static final String MDB_POSTER_PATH = "http://image.tmdb.org/t/p/w185";
+    private static final String MDB_MOVIE_PATH1 = "https://api.themoviedb.org/3/movie/";
     /**
      * Tag for the log messages
      */
     private static final String api_key = "1157007d8e3f7d5e0af6d7e4165e2730";
-    public static final String MDB_MOVIE_PATH2 = "/videos?api_key=" + api_key;
-    public static final String MDB_REVIEWS_PATH2 = "/reviews?api_key=" + api_key;
+    private static final String MDB_MOVIE_PATH2 = "/videos?api_key=" + api_key;
+    private static final String MDB_REVIEWS_PATH2 = "/reviews?api_key=" + api_key;
     private static final String API_KEY = "api_key";
 
 
@@ -160,7 +160,7 @@ public class QueryUtils {
      * Return a list of {@link SingleMovie} objects that has been built up from
      * parsing a JSON response.
      */
-    public static ArrayList<SingleMovie> extractMovies(String singleMovieJSON) {
+    private static ArrayList<SingleMovie> extractMovies(String singleMovieJSON) {
         // If the JSON string is empty or null, then return early.
         if (TextUtils.isEmpty(singleMovieJSON)) {
             return null;

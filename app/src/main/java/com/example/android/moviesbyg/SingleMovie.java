@@ -1,18 +1,18 @@
 package com.example.android.moviesbyg;
 
 /**
- * Created by Marcin on 2017-09-12.
+ * Created by Marcin on 2018-02-10..
  */
 
-public class SingleMovie {
+class SingleMovie {
     private final String mPoster;
-    private String mTitle;
-    private String mOverview;
-    private String mReleaseDate;
-    private String mVoting;
-    private String mVideosPath;
-    private String mReviewsPath;
-    private String mMovieID;
+    private final String mTitle;
+    private final String mOverview;
+    private final String mReleaseDate;
+    private final String mVoting;
+    private final String mVideosPath;
+    private final String mReviewsPath;
+    private final String mMovieID;
 
     /**
      * Create a new SingleMovieobject.
