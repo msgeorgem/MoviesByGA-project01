@@ -27,7 +27,10 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MoviesView
     public static final String EXTRA_ID = "EXTRA_ID";
     public static final String EXTRA_POSTER = "EXTRA_POSTER";
 
+    public static final String EXTRA_DATA = "EXTRA_DATA";
+
     private final ArrayList<SingleMovie> mListAdapter;
+
 
     public MoviesAdapter(ArrayList<SingleMovie> listMovies) {
         mListAdapter = listMovies;
@@ -60,6 +63,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MoviesView
             @Override
             public void onClick(View view) {
                 Context context = viewHolder.itemView.getContext();
+
                 String currentMovieTitleString = currentMovie.getTitle();
                 String currentMovieOverviewString = currentMovie.getOverview();
                 String currentMovieReleaseDateString = currentMovie.getmReleaseDate();
@@ -68,6 +72,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MoviesView
                 String currentMovieID = currentMovie.getMovieID();
 
                 Intent intent1 = new Intent(view.getContext(), DetailActivity.class);
+
                 intent1.putExtra(EXTRA_TITLE, currentMovieTitleString);
                 intent1.putExtra(EXTRA_OVERVIEW, currentMovieOverviewString);
                 intent1.putExtra(EXTRA_RELEASE_DATE, currentMovieReleaseDateString);

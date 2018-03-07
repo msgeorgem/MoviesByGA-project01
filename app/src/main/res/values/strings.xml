@@ -12,11 +12,11 @@
     <string name="settings_order_by_popularity_label" translatable="true">Popularity</string>
     <string name="settings_order_by_vote_label" translatable="true">Vote</string>
 
-    <string name="settings_order_by_popularity_value">popularity.desc</string>
-    <string name="settings_order_by_vote_value">vote_average.desc</string>
+    <string name="settings_order_by_popularity_value">https://api.themoviedb.org/3/movie/popular</string>
+    <string name="settings_order_by_vote_value">https://api.themoviedb.org/3/movie/top_rated</string>
 
     <!-- Default order for order preference -->
-    <string name="settings_order_by_default" translatable="false">popularity.desc</string>
+    <string name="settings_order_by_default" translatable="false">popular?</string>
     <string name="settings_order_by_label">Order By</string>
     <string name="settings_order_by_key">order</string>
 

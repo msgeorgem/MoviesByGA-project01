@@ -33,13 +33,10 @@ public class MoviesActivity extends AppCompatActivity implements LoaderManager.L
      * This really only comes into play if you're using multiple loaders.
      */
     private static final int MOVIES_LOADER_ID = 1;
-    private static final String URL =
-            "https://api.themoviedb.org/3/discover/movie?";
-    private static final String QUERY_BASE_URL = URL;
+
     /* API_KEY gained from themoviedb.org */
+    private static final String api_key = BuildConfig.API_KEY;
     private static final String API_KEY = "api_key";
-    private static final String api_key = "1157007d8e3f7d5e0af6d7e4165e2730";
-    private static final String SORT_BY = "sort_by";
     private final ArrayList<SingleMovie> movieGrid = new ArrayList<>();
     /**
      * Adapter for the list of movies
@@ -110,17 +107,16 @@ public class MoviesActivity extends AppCompatActivity implements LoaderManager.L
         Log.i(LOG_TAG, "onCreateLoader");
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
 
-        String order = sharedPrefs.getString(
+        String urlOrder = sharedPrefs.getString(
                 getString(R.string.settings_order_by_key),
                 getString(R.string.settings_order_by_label)
         );
 
-        Uri baseUri = Uri.parse(QUERY_BASE_URL);
+        Uri baseUri = Uri.parse(urlOrder);
         Uri.Builder uriBuilder = baseUri.buildUpon();
 
         uriBuilder.appendQueryParameter(API_KEY, api_key);
-        uriBuilder.appendQueryParameter(SORT_BY, order);
-
+        Log.i(LOG_TAG, uriBuilder.toString());
         return new MoviesLoader(this, uriBuilder.toString());
     }
 
