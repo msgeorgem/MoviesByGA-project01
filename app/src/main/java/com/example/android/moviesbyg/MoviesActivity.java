@@ -26,6 +26,12 @@ import java.util.ArrayList;
 
 public class MoviesActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<ArrayList<SingleMovie>> {
 
+    public static final String EXTRA_TITLE = "EXTRA_TITLE";
+    public static final String EXTRA_OVERVIEW = "EXTRA_OVERVIEW";
+    public static final String EXTRA_RELEASE_DATE = "EXTRA_RELEASE_DATE";
+    public static final String EXTRA_VOTE = "EXTRA_VOTE";
+    public static final String EXTRA_ID = "EXTRA_ID";
+    public static final String EXTRA_POSTER = "EXTRA_POSTER";
     private static final String LOG_TAG = MoviesActivity.class.getName();
     private static final String BUNDLE_RECYCLER_LAYOUT = "MoviesActivity.moviesRecyclerView.activity_movies";
     /**
@@ -38,10 +44,12 @@ public class MoviesActivity extends AppCompatActivity implements LoaderManager.L
     private static final String api_key = BuildConfig.API_KEY;
     private static final String API_KEY = "api_key";
     private final ArrayList<SingleMovie> movieGrid = new ArrayList<>();
+
     /**
      * Adapter for the list of movies
      */
-    private MoviesAdapter mAdapter;
+    private MoviesAdapter.OnItemClickListener mListener;
+    private MoviesAdapter mAdapter = new MoviesAdapter(movieGrid, mListener);
     private Parcelable state;
     private RecyclerView moviesRecyclerView;
     /**
@@ -65,7 +73,32 @@ public class MoviesActivity extends AppCompatActivity implements LoaderManager.L
             moviesRecyclerView.setLayoutManager(new GridLayoutManager(this, 4));
         }
 
-        mAdapter = new MoviesAdapter(movieGrid);
+        mListener = new MoviesAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(SingleMovie item) {
+
+                String currentMovieTitleString = item.getTitle();
+                String currentMovieOverviewString = item.getOverview();
+                String currentMovieReleaseDateString = item.getmReleaseDate();
+                String currentMovieVotingString = item.getVoting();
+                String currentMoviePosterString = item.getPoster();
+                String currentMovieID = item.getMovieID();
+
+                Intent intent1 = new Intent(getApplicationContext(), DetailActivity.class);
+
+                intent1.putExtra(EXTRA_TITLE, currentMovieTitleString);
+                intent1.putExtra(EXTRA_OVERVIEW, currentMovieOverviewString);
+                intent1.putExtra(EXTRA_RELEASE_DATE, currentMovieReleaseDateString);
+                intent1.putExtra(EXTRA_VOTE, currentMovieVotingString);
+                intent1.putExtra(EXTRA_POSTER, currentMoviePosterString);
+                intent1.putExtra(EXTRA_ID, currentMovieID);
+
+                startActivity(intent1);
+            }
+        };
+
+        mAdapter = new MoviesAdapter(movieGrid, mListener);
+
 
         // Set the adapter on the {@link ListView}
         // so the list can be populated in the user interface
@@ -128,12 +161,12 @@ public class MoviesActivity extends AppCompatActivity implements LoaderManager.L
         loadingIndicator.setVisibility(View.GONE);
 
         moviesRecyclerView.setVisibility(View.VISIBLE);
-        mAdapter = new MoviesAdapter(movieGrid);
+        mAdapter = new MoviesAdapter(movieGrid, mListener);
 
         // If there is a valid list of {@link Movies}s, then add them to the adapter's
         // data set. This will trigger the ListView to update.
         if (movies != null && !movies.isEmpty()) {
-            mAdapter = new MoviesAdapter(movies);
+            mAdapter = new MoviesAdapter(movies, mListener);
             moviesRecyclerView.setAdapter(mAdapter);
         }
     }
@@ -142,7 +175,7 @@ public class MoviesActivity extends AppCompatActivity implements LoaderManager.L
     public void onLoaderReset(Loader<ArrayList<SingleMovie>> loader) {
         // Loader reset, so we can clear out our existing data.
         Log.i(LOG_TAG, "onLoaderReset");
-        mAdapter = new MoviesAdapter(movieGrid);
+        mAdapter = new MoviesAdapter(movieGrid, mListener);
     }
 
     @Override

@@ -36,24 +36,24 @@ public class DetailActivity extends AppCompatActivity {
         ActivityDetailBinding mDetailBinding = DataBindingUtil.setContentView(this, R.layout.activity_detail);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        String title = getIntent().getStringExtra(MoviesAdapter.EXTRA_TITLE);
+        String title = getIntent().getStringExtra(MoviesActivity.EXTRA_TITLE);
         mDetailBinding.part2.title.setText(title);
 
-        String releaseDate = getIntent().getStringExtra(MoviesAdapter.EXTRA_RELEASE_DATE);
+        String releaseDate = getIntent().getStringExtra(MoviesActivity.EXTRA_RELEASE_DATE);
         mDetailBinding.part2.releaseDate.setText(releaseDate);
 
-        String vote = getIntent().getStringExtra(MoviesAdapter.EXTRA_VOTE);
+        String vote = getIntent().getStringExtra(MoviesActivity.EXTRA_VOTE);
         mDetailBinding.part2.rating.setText(vote);
 
-        String overview = getIntent().getStringExtra(MoviesAdapter.EXTRA_OVERVIEW);
+        String overview = getIntent().getStringExtra(MoviesActivity.EXTRA_OVERVIEW);
         mDetailBinding.part3.overview.setText(overview);
 
-        String poster = getIntent().getStringExtra(MoviesAdapter.EXTRA_POSTER);
+        String poster = getIntent().getStringExtra(MoviesActivity.EXTRA_POSTER);
         context = mDetailBinding.part1.poster.getContext();
         Picasso.with(context).load(poster).into(mDetailBinding.part1.poster);
 
 
-        MDB_CURRENT_MOVIE_ID = getIntent().getStringExtra(MoviesAdapter.EXTRA_ID);
+        MDB_CURRENT_MOVIE_ID = getIntent().getStringExtra(MoviesActivity.EXTRA_ID);
 
         mMovieSummary = title + "" + releaseDate + "" + overview;
         Log.i(LOG_TAG, "initClipsLoader");
