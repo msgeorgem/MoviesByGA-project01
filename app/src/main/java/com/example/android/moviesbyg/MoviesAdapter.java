@@ -47,7 +47,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MoviesView
         final SingleMovie currentMovie = mListAdapter.get(position);
         viewHolder.imageURL = currentMovie.getPoster();
         Context context = viewHolder.itemView.getContext();
-        Picasso.with(context).load(viewHolder.imageURL).into(viewHolder.imageView);
+        Picasso.with(context).load(viewHolder.imageURL).fit().centerCrop().into(viewHolder.imageView);
     }
 
     public interface OnItemClickListener {
